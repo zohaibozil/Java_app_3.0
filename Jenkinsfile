@@ -73,6 +73,14 @@ pipeline{
                }
             }
         }
+
+         stage("Jfrog Artifactory:Push"){
+         when { expression {  params.action == 'create' }}
+            steps{
+                withCredentials([usernamePassword(credentialsId:"jfrog",passwordVariable:"PASS",usernameVariable:"USER")]){
+				sh "curl -X PUT -u '$USER':'$PASS' -T kubernetes-configmap-reload-0.0.1-SNAPSHOT.jar http://34.207.84.172:8082/artifactory/example-repo-local/"}
+				}
+               }
         stage('Docker Image Build'){
          when { expression {  params.action == 'create' } }
             steps{
