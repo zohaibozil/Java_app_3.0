@@ -78,7 +78,7 @@ pipeline{
          when { expression {  params.action == 'create' }}
             steps{
                 withCredentials([usernamePassword(credentialsId:"jfrog",passwordVariable:"PASS",usernameVariable:"USER")]){
-				sh "curl -X PUT -u '$USER':'$PASS' -T /var/lib/jenkins/workspace/zohaib_as2/target http://34.207.84.172:8082/artifactory/example-repo-local/"}
+				sh "curl -X PUT -u '$USER':'$PASS' -T /var/lib/jenkins/workspace/zohaib_as2/target http://34.207.84.172:8081/artifactory/example-repo-local/"}
 				}
                }
         stage('Docker Image Build'){
