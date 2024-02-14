@@ -77,11 +77,13 @@ pipeline{
          stage("Jfrog Artifactory:Push"){
          when { expression {  params.action == 'create' }}
             steps{
+		    script{
                 rtMaven.deployer {
                     server = 'jfrog'
                     releaseRepo = 'kubernetes-configmap-reload-0.0.1-SNAPSHOT.jar'
                     snapshotRepo = 'kubernetes-configmap-reload-0.0.1-SNAPSHOT.jar'
                     deployArtifacts = true
+		}
                 }
 				}
                }
